@@ -388,6 +388,9 @@ Continuous monitoring and anomaly detection flag unusual behavior (for example, 
 
 **Appendix D** provides example log formats, correlation\_id usage, and queries to reconstruct delegation chains and “prove control on demand.”
 
+The logging guidance above describes *what* to capture but does not prescribe a cryptographic format for producing operator-independent, offline-verifiable records. For the post-execution binding between agent identity and a specific action, [draft-etcheverry-action-ref](https://datatracker.ietf.org/doc/draft-etcheverry-action-ref/) defines `action_ref`: a content-addressed identifier derived as SHA-256(JCS({agent\_id, action\_type, scope, timestamp})) that any third party can verify offline without trusting the operator. The spec has 6 independent conformance implementations across AutoGen, LangGraph, Stripe, Coinbase AgentKit, and the FINOS AI Governance Framework.
+
+
 ## 5\. Transitioning to Agentic IAM 
 
 Agentic IAM extends existing infrastructure—it does not replace it. Identity stores become agent registries by adding schemas for non-human principals, lifecycle state, and capability/risk tiers. PKI issues certificates bound to agents and execution environments. OAuth/OIDC servers gain token exchange (RFC 8693\) and OBO flows for delegation-aware, task-scoped access. RBAC is augmented with ABAC/PBAC policies that evaluate intent, context, and risk signals. Manual provisioning gives way to platform-driven lifecycle orchestration with immutable audit trails. The structural foundations remain; the work is enriching them with agent-specific semantics.
